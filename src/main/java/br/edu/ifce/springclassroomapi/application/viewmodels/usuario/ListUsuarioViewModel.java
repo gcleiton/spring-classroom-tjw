@@ -1,37 +1,36 @@
 package br.edu.ifce.springclassroomapi.application.viewmodels.usuario;
 
+import br.edu.ifce.springclassroomapi.application.viewmodels.ViewModelWithIdAndNome;
 import br.edu.ifce.springclassroomapi.domain.enums.IdentificacaoTipo;
+import com.google.gson.Gson;
 
 import java.util.UUID;
 
-public class GetUsuarioViewModel {
+public class ListUsuarioViewModel {
     private final UUID id;
     private final String nome;
     private final String email;
-    private final String Cpf;
     private final String telefone;
     private final String identificacao;
     private final IdentificacaoTipo identificacaoTipo;
-    private final UUID cursoId;
+    private final ViewModelWithIdAndNome curso;
 
-    public GetUsuarioViewModel(
+    public ListUsuarioViewModel(
         UUID id,
         String nome,
         String email,
-        String cpf,
         String telefone,
         String identificacao,
         IdentificacaoTipo identificacaoTipo,
-        UUID cursoId)
+        ViewModelWithIdAndNome curso)
     {
         this.id = id;
         this.nome = nome;
         this.email = email;
-        Cpf = cpf;
         this.telefone = telefone;
         this.identificacao = identificacao;
         this.identificacaoTipo = identificacaoTipo;
-        this.cursoId = cursoId;
+        this.curso = curso;
     }
 
     public UUID getId() {
@@ -46,10 +45,6 @@ public class GetUsuarioViewModel {
         return email;
     }
 
-    public String getCpf() {
-        return Cpf;
-    }
-
     public String getTelefone() {
         return telefone;
     }
@@ -62,7 +57,12 @@ public class GetUsuarioViewModel {
         return identificacaoTipo;
     }
 
-    public UUID getCursoId() {
-        return cursoId;
+    public ViewModelWithIdAndNome getCurso() {
+        return curso;
+    }
+
+    public String serialize() {
+        var gson = new Gson();
+        return gson.toJson(this);
     }
 }

@@ -42,3 +42,22 @@ function resetErrors(){
     $('.alert-danger').addClass("d-none");
     $(".alert-danger").html('');
 }
+
+const dataTableTranslation = {
+    "processing": '<div>Carregando dados...</div>',
+    "emptyTable": "Nenhum registro encontrado no banco de dados",
+    "info": "Mostrando registros de _START_ até _END_ de um total de _TOTAL_ registros",
+    "infoEmpty": "Mostrando registros de 0 até 0 de um total de 0 registros",
+    "paginate": {
+        "previous": "Anterior",
+        "next": "Próximo"
+    },
+}
+
+function formDataToObject(formData) {
+    var obj = {};
+    for (var pair of formData.entries()) {
+        obj[pair[0]] = pair[1] === '' ? null : pair[1]
+    }
+    return obj;
+}

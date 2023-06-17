@@ -1,5 +1,16 @@
 $(document).ready(function () {
     let cursoId = undefined
+    const cursosTableId = "#cursos-table"
+
+    $(cursosTableId).DataTable({
+        order: [[ 0, "asc" ]],
+        searching: false,
+        lengthChange: false,
+        orderable: false,
+        paging: true,
+        pageLength: 20,
+        language: dataTableTranslation
+    })
 
     $('.modal').on('hidden.bs.modal', function() {
         resetErrors()

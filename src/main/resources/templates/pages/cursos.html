@@ -139,7 +139,7 @@
     <section class="section">
         <div class="card">
             <div class="card-body">
-                <table class='table table-striped table-responsive' id="table1">
+                <table class='table table-striped table-responsive table-borderless' id="cursos-table">
                     <thead>
                     <tr>
                         <th>Nome</th>
@@ -154,7 +154,7 @@
                         <td th:text="${curso.getCursoTipo()}">Ativo</td>
                         <td>
                             <button class="btn btn-warning btn-sm" data-bs-target="#curso-edit-modal" data-bs-toggle="modal" th:value="${curso.getId()}">Editar</button>
-                            <button class="btn btn-danger btn-sm" data-bs-target="#curso-remove-modal" data-bs-toggle="modal" th:value="${curso.getId()}">Excluir</button>
+                            <button class="btn btn-danger btn-sm" data-bs-target="#curso-remove-modal" data-bs-toggle="modal" th:value="${curso.getId()}">Remover</button>
                         </td>
                     </tbody>
                 </table>
@@ -163,4 +163,3 @@
     </section>
 </div>
 </body>
-</html>

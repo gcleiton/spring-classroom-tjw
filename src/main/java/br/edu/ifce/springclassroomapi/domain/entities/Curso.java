@@ -1,15 +1,14 @@
 package br.edu.ifce.springclassroomapi.domain.entities;
 
 import br.edu.ifce.springclassroomapi.domain.enums.CursoTipo;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "cursos")
 public class Curso extends EntityBase {
+    @Column(nullable = false)
     private String nome;
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private CursoTipo cursoTipo;
 

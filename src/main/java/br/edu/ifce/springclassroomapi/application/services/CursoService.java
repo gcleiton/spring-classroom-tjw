@@ -9,6 +9,7 @@ import br.edu.ifce.springclassroomapi.domain.entities.Curso;
 import br.edu.ifce.springclassroomapi.infrastructure.repositories.CursoRepository;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,8 +19,8 @@ import java.util.stream.Collectors;
 @Service
 public class CursoService {
     private final CursoRepository cursoRepository;
-
     private final Validator validator;
+    private final Sort defaultSort = Sort.by(Sort.Direction.ASC, "nome");
 
     public CursoService(CursoRepository cursoRepository, Validator validator) {
         this.cursoRepository = cursoRepository;
@@ -27,7 +28,7 @@ public class CursoService {
     }
 
     public Result<List<ListCursoViewModel>> list() {
-        var cursos = cursoRepository.findAll();
+        var cursos = cursoRepository.findAll(defaultSort);
         var cursosViewModel = cursos.stream().map(curso -> new ListCursoViewModel(
                 curso.getId(),
                 curso.getNome(),

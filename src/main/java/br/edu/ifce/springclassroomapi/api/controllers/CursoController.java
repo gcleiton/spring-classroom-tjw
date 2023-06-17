@@ -22,7 +22,7 @@ public class CursoController extends Controller {
     }
 
     @GetMapping()
-    public String list(Model model) {
+    public String index(Model model) {
         var result = cursoService.list();
         model.addAttribute("cursos", result.getData());
         model.addAttribute("cursoTipos", CursoTipo.asList());

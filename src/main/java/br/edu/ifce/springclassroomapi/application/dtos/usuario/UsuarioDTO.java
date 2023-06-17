@@ -1,41 +1,47 @@
-package br.edu.ifce.springclassroomapi.domain.entities;
+package br.edu.ifce.springclassroomapi.application.dtos.usuario;
 
 import br.edu.ifce.springclassroomapi.domain.enums.IdentificacaoTipo;
-import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
-import java.util.List;
+import java.util.UUID;
 
-@Entity
-@Table(name = "usuarios")
-public class Usuario extends EntityBase {
-    @Column(nullable = false)
+public class UsuarioDTO {
+    private UUID id;
+    @NotBlank(message = "O nome do usuário é obrigatório")
     private String nome;
-    @Column(unique = true, nullable = false)
+    @NotBlank(message = "O e-mail do usuário é obrigatório")
     private String email;
-    @Column(unique = true, nullable = false)
+    @NotBlank(message = "O CPF do usuário é obrigatório")
     private String cpf;
     private String telefone;
-    @Column(unique = true, nullable = false)
+    @NotBlank(message = "O número de identificação do usuário é obrigatório")
     private String identificacao;
-    @Column(nullable = false)
+    @NotNull(message = "O tipo de identificação do usuário é obrigatório")
     private IdentificacaoTipo identificacaoTipo;
-    @ManyToOne
-    @JoinColumn(name = "curso_id")
-    private Curso curso;
+    private UUID cursoId;
 
-    @ManyToMany(mappedBy = "alunos")
-    private List<Turma> turmas;
+    public UsuarioDTO() {
+    }
 
-    protected Usuario() { }
-
-    public Usuario(String nome, String email, String cpf, String telefone, String identificacao, IdentificacaoTipo identificacaoTipo, Curso curso) {
+    public UsuarioDTO(
+        UUID id,
+        String nome,
+        String email,
+        String cpf,
+        String telefone,
+        String identificacao,
+        IdentificacaoTipo identificacaoTipo,
+        UUID cursoId)
+    {
+        this.id = id;
         this.nome = nome;
         this.email = email;
         this.cpf = cpf;
         this.telefone = telefone;
         this.identificacao = identificacao;
         this.identificacaoTipo = identificacaoTipo;
-        this.curso = curso;
+        this.cursoId = cursoId;
     }
 
     public String getNome() {
@@ -70,7 +76,6 @@ public class Usuario extends EntityBase {
         this.telefone = telefone;
     }
 
-
     public String getIdentificacao() {
         return identificacao;
     }
@@ -87,11 +92,19 @@ public class Usuario extends EntityBase {
         this.identificacaoTipo = identificacaoTipo;
     }
 
-    public Curso getCurso() {
-        return curso;
+    public UUID getCursoId() {
+        return cursoId;
     }
 
-    public void setCurso(Curso curso) {
-        this.curso = curso;
+    public void setCursoId(UUID cursoId) {
+        this.cursoId = cursoId;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 }
