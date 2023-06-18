@@ -61,7 +61,7 @@
                         <div class="col">
                             <label>Curso: </label>
                             <select class="choices form-select" disabled id="curso" th:field="*{cursoId}">
-                                <option hidden selected value="">Selecione aqui</option>
+                                <option hidden selected value="undefined">Selecione aqui</option>
                                 <option
                                         th:each="curso : ${cursos}"
                                         th:text="${curso.getNome()}"
@@ -96,5 +96,10 @@
         </div>
     </section>
 </div>
+
+<div layout:fragment="scripts">
+    <script th:src="@{/js/usuarios.js}"></script>
+</div>
+
 </body>
 </html>

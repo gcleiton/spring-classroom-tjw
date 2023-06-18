@@ -21,7 +21,6 @@ $(document).ready(function () {
     const removeUsuarioModal = '#usuario-remove-modal'
     $(removeUsuarioModal).on('shown.bs.modal', function(event) {
         usuarioId = event.relatedTarget.attributes.getNamedItem('value').value;
-        console.log("chegda")
         $.ajax({
             url: '/usuarios/' + usuarioId + '/obter',
             type: 'GET',
@@ -58,5 +57,29 @@ $(document).ready(function () {
                 showErrorMessage("Erro ao remover usuário", "Ocorreu um erro ao remover o usuário. Por favor, tente novamente mais tarde.")
             }
         })
+    })
+
+    const telefoneInput = document.getElementById('telefone')
+    const cpfInput = document.getElementById('cpf')
+
+    IMask(telefoneInput, {
+        mask: '(00) 00000-0000'
+    });
+
+    IMask(cpfInput, {
+        mask: '000.000.000-00'
+    });
+
+    const identificacaoTipoId = '#identificacaoTipo'
+    const cursoId = '#curso'
+    $(identificacaoTipoId).on('change', function () {
+        const identificacaoTipo = $(this).val()
+        if(identificacaoTipo === 'Aluno') {
+            $(cursoId).removeAttr('disabled')
+            return
+        }
+
+        $(cursoId).attr('disabled', 'disabled')
+        $(cursoId).val('undefined')
     })
 })

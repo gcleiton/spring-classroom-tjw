@@ -82,11 +82,11 @@
                         <table class='table table-striped table-responsive' id="alunos-table">
                             <thead>
                             <tr>
-                                <th class="d-none">Nome</th>
+                                <th class="d-none"></th>
                                 <th>Nome</th>
                                 <th>Email</th>
-                                <th>Curso</th>
                                 <th>Identificação</th>
+                                <th>Curso</th>
                                 <th>Ações</th>
                             </tr>
                             <tbody>
@@ -94,11 +94,10 @@
                                 <td class="d-none" th:text="${aluno.getId()}"></td>
                                 <td th:text="${aluno.getNome()}"></td>
                                 <td th:text="${aluno.getEmail()}"></td>
-                                <td th:text="${aluno.getCurso().getNome()}"></td>
                                 <td th:text="${aluno.getIdentificacao()}"></td>
+                                <td th:text="${aluno.getCurso().getNome()}"></td>
                                 <td>
-                                    <a class="btn btn-warning btn-sm" th:href="'/usuarios/' + ${aluno.getId()}">Editar</a>
-                                    <button class="btn btn-danger btn-sm" th:value="${aluno.getId()}">Desativar</button>
+                                    <button class="btn btn-danger btn-sm remove-aluno" type="button">Remover</button>
                                 </td>
                             </tbody>
                         </table>
@@ -129,5 +128,10 @@
         </div>
     </section>
 </div>
+
+<div layout:fragment="scripts">
+    <script th:src="@{/js/turmas.js}"></script>
+</div>
+
 </body>
 </html>

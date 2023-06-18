@@ -19,14 +19,54 @@ $(document).ready(function () {
         language: dataTableTranslation
     })
 
+    const alunosTable = $(alunosTableId).DataTable({
+        order: [[0, 'asc']],
+        searching: false,
+        lengthChange: false,
+        orderable: false,
+        paging: false,
+        language: dataTableTranslation,
+        columns: [
+            {
+                data: 'id',
+                name: 'id',
+                visible: false
+            },
+            {
+                data: 'nome',
+                name: 'nome'
+            },
+            {
+                data: 'email',
+                name: 'email'
+            },
+            {
+                data: 'identificacao',
+                name: 'identificacao'
+            },
+            {
+                data: 'curso.nome',
+                name: 'curso'
+            },
+            {
+                data: null,
+                name: 'acoes',
+                render: function () {
+                    return `<button class="btn btn-danger btn-sm remove-aluno">Remover</button>`
+                }
+            }
+        ]
+    })
+
     $(alunosTableId).on('click', '.remove-aluno', function () {
+        console.log("teste")
         alunosTable
             .row($(this).parents('tr'))
             .remove()
             .draw();
     });
 
-     $('#curso').on('change', function () {
+    $('#curso').on('change', function () {
         const cursoId = $(this).val();
         if (cursoId) {
             $.ajax({
@@ -48,10 +88,11 @@ $(document).ready(function () {
             $(alunoSelectId).empty();
             $(alunoSelectId).setAttribute('disabled', 'disabled');
         }
-     })
+    })
 
     $(addAlunoButtonId).on('click', function () {
         const selectedAluno = JSON.parse($(alunoSelectId).val())
+        console.log(selectedAluno)
         $(alunoSelectId).val('undefined')
         alunosTable.row.add(selectedAluno).draw(false);
     })
